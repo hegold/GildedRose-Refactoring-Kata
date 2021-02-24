@@ -21,12 +21,10 @@ public:
     void zeroQuality() { quality = 0; }
     bool isPastSellIn() const;
     
-    bool isSulfuras() const;
-    
-    void decrementQuality();
     void incrementQuality();
 
-    void decrementSellIn();
+    virtual void decrementSellIn();
+    virtual void decrementQuality();
     virtual void preAdjustQuality();
     virtual void postAdjustQuality();
 };
@@ -45,6 +43,14 @@ public:
 
 	virtual void preAdjustQuality() override;
 	virtual void postAdjustQuality() override;
+};
+
+class Sulfuras : public Item {
+public:
+    Sulfuras(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
+
+    virtual void decrementSellIn() override;
+    virtual void decrementQuality() override;
 };
 
 struct ItemFactory {

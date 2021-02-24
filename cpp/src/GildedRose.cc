@@ -32,18 +32,12 @@ bool Item::isPastSellIn() const {
 	return sellIn < 0;
 }
 
-bool Item::isSulfuras() const {
-    return name == "Sulfuras, Hand of Ragnaros";
-}
-
 void Item::decrementSellIn() {
-	if (!isSulfuras()) {
-		--sellIn;
-	}
+	--sellIn;
 }
 
 void Item::decrementQuality() {
-	if (quality > 0 && !isSulfuras()) {
+	if (quality > 0) {
         --quality;
     }
 }
@@ -83,6 +77,9 @@ std::shared_ptr<Item> ItemFactory::make(string name, int sellIn, int quality) {
 	else if (name == "Backstage passes to a TAFKAL80ETC concert") {
 		return make_shared<BackstagePass>(name, sellIn, quality);
 	}
+	else if (name == "Sulfuras, Hand of Ragnaros") {
+		return make_shared<Sulfuras>(name, sellIn, quality);
+	}
 	else {
 		return make_shared<Item>(name, sellIn, quality);
 	}
@@ -108,3 +105,12 @@ void BackstagePass::postAdjustQuality() {
 		quality = 0;
 	}
 }
+
+void Sulfuras::decrementSellIn() {
+	// Does not change sell in
+}
+
+void Sulfuras::decrementQuality() {
+	// Does not lose quality
+}
+
