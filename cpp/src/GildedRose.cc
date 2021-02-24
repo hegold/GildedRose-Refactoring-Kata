@@ -13,27 +13,18 @@ void GildedRose::updateQuality()
         }
         else
         {
-            if (item.getQuality() < 50)
+            item.incrementQuality();
+
+            if (item.isBackstagePass())
             {
-                item.incrementQuality();
-
-                if (item.isBackstagePass())
+                if (item.getSellIn() < 11)
                 {
-                    if (item.getSellIn() < 11)
-                    {
-                        if (item.getQuality() < 50)
-                        {
-                            item.incrementQuality();
-                        }
-                    }
+                    item.incrementQuality();
+                }
 
-                    if (item.getSellIn() < 6)
-                    {
-                        if (item.getQuality() < 50)
-                        {
-                            item.incrementQuality();
-                        }
-                    }
+                if (item.getSellIn() < 6)
+                {
+                    item.incrementQuality();
                 }
             }
         }
@@ -55,10 +46,7 @@ void GildedRose::updateQuality()
             }
             else
             {
-                if (item.getQuality() < 50)
-                {
-                    item.incrementQuality();
-                }
+                item.incrementQuality();
             }
         }
     }
@@ -89,5 +77,7 @@ void Item::decrementQuality() {
 }
 
 void Item::incrementQuality() {
-    ++quality;
+    if (quality < 50) {
+        ++quality;
+    }
 }
