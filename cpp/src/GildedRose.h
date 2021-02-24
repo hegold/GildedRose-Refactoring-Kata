@@ -32,5 +32,8 @@ public:
     GildedRose(vector<Item> & items);
     
     void updateQuality();
+
+    void adjustQualityBeforeSellIn(Item& item);
+
 };
 
