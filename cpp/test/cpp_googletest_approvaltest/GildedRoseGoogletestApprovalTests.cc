@@ -5,6 +5,7 @@
 // Include code to be tested
 #include "GildedRose.h"
 
+
 std::ostream& operator<<(std::ostream& os, const Item& obj)
 {
     return os
@@ -13,6 +14,10 @@ std::ostream& operator<<(std::ostream& os, const Item& obj)
         << ", quality: " << obj.getQuality();
 }
 
+std::ostream& operator<<(std::ostream& os, shared_ptr<Item> obj)
+{
+	return os << *obj;
+}
 TEST(GildedRoseApprovalTests, VerifyCombinations) {
 
 	std::vector<string> names { 
@@ -28,7 +33,7 @@ TEST(GildedRoseApprovalTests, VerifyCombinations) {
     std::vector<int> qualities { -1, 0, 6, 7, 19, 20, 29, 30, 49, 80, 1000 };
 
     auto f = [](string name, int sellIn, int quality) {
-        vector<Item> items = {Item(name, sellIn, quality)};
+        vector<shared_ptr<Item>> items = { ItemFactory::make(name, sellIn, quality) };
         GildedRose app(items);
         app.updateQuality();
         return items[0];

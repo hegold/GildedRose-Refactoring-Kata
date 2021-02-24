@@ -1,8 +1,14 @@
 #include "GildedRose.h"
 
-GildedRose::GildedRose(vector<Item> & items) : items(items)
+GildedRose::GildedRose(vector<Item> & items) 
+	: items(items)
 {}
     
+GildedRose::GildedRose(vector<shared_ptr<Item>> items)
+	: newItems(std::move(items))
+	, items(vector<Item>()) 
+{}
+
 void GildedRose::updateQuality() 
 {
     for (Item& item : items)
@@ -11,6 +17,13 @@ void GildedRose::updateQuality()
         item.decrementSellIn();
 		item.postAdjustQuality();
     }
+
+	for (auto&& item : newItems)
+	{
+		item->preAdjustQuality();
+		item->decrementSellIn();
+		item->postAdjustQuality();
+	}
 }
 
 int Item::getSellIn() const {
@@ -90,5 +103,18 @@ void Item::postAdjustQuality() {
 		else {
 			decrementQuality();
 		}
+	}
+}
+
+bool AgedBrie::isAgedBrie() const {
+	return true;
+}
+
+std::shared_ptr<Item> ItemFactory::make(string name, int sellIn, int quality) {
+	if (name == "Aged Brie") {
+		return make_shared<AgedBrie>(name, sellIn, quality);
+	}
+	else {
+		return make_shared<Item>(name, sellIn, quality);
 	}
 }

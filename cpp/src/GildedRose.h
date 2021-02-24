@@ -1,7 +1,10 @@
 #include <string>
 #include <vector>
+#include <memory>
 
 using namespace std;
+
+
 
 class Item
 {
@@ -17,7 +20,7 @@ public:
     void zeroQuality() { quality = 0; }
     bool isPastSellIn() const;
     
-    bool isAgedBrie() const;
+    virtual bool isAgedBrie() const;
     bool isSulfuras() const;
     bool isBackstagePass() const;
     
@@ -29,11 +32,25 @@ public:
     void postAdjustQuality();
 };
 
+class AgedBrie : public Item {
+public:
+    AgedBrie(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
+    
+    virtual bool isAgedBrie() const override;
+};
+
+struct ItemFactory {
+	static shared_ptr<Item> make(string name, int sellIn, int quality);
+};
+
 class GildedRose
 {
 public:
-    vector<Item> & items;
-    GildedRose(vector<Item> & items);
+    vector<Item>& items; // legacy
+    GildedRose(vector<Item>& items);
+
+    vector<shared_ptr<Item>> newItems;
+    GildedRose(vector<shared_ptr<Item>> items);
     
     void updateQuality();
 };
