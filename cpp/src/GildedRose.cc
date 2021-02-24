@@ -43,11 +43,7 @@ void GildedRose::adjustQualityBeforeSellIn(Item& item) {
 void GildedRose::adjustQualityAfterSellIn(Item& item) {
 	if (item.isPastSellIn())
 	{
-		if (item.isAgedBrie())
-		{
-			item.incrementQuality();
-		}
-		else if (item.isBackstagePass()) {
+		if (item.isBackstagePass()) {
 			item.zeroQuality();
 		}
 		else
@@ -88,7 +84,10 @@ void Item::decrementSellIn() {
 }
 
 void Item::decrementQuality() {
-    if (quality > 0 && !isSulfuras()) {
+	if (isAgedBrie() && isPastSellIn()) {
+		incrementQuality();
+	}
+	else if (quality > 0 && !isSulfuras()) {
         --quality;
     }
 }
