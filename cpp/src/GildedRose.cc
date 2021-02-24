@@ -41,7 +41,7 @@ void GildedRose::adjustQualityBeforeSellIn(Item& item) {
 }
 
 void GildedRose::adjustQualityAfterSellIn(Item& item) {
-	if (item.getSellIn() < 0)
+	if (item.isPastSellIn())
 	{
 		if (item.isAgedBrie())
 		{
@@ -63,6 +63,10 @@ int Item::getSellIn() const {
 
 int Item::getQuality() const {
 	return quality;
+}
+
+bool Item::isPastSellIn() const {
+	return sellIn < 0;
 }
 
 bool Item::isAgedBrie() const {

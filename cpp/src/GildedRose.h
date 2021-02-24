@@ -15,7 +15,8 @@ public:
     int getSellIn() const;
     int getQuality() const;
     void zeroQuality() { quality = 0; }
-
+    bool isPastSellIn() const;
+    
     bool isAgedBrie() const;
     bool isSulfuras() const;
     bool isBackstagePass() const;
