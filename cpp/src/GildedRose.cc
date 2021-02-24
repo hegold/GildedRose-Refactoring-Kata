@@ -11,8 +11,10 @@ void GildedRose::updateQuality()
 
         item.decrementSellIn();
 
-		adjustQualityAfterSellIn(item);
-
+		if (item.isPastSellIn())
+		{
+			item.decrementQuality();
+		}
     }
 }
 
@@ -36,13 +38,6 @@ void GildedRose::adjustQualityBeforeSellIn(Item& item) {
 		}
 	}
 	else {
-		item.decrementQuality();
-	}
-}
-
-void GildedRose::adjustQualityAfterSellIn(Item& item) {
-	if (item.isPastSellIn())
-	{
 		item.decrementQuality();
 	}
 }
