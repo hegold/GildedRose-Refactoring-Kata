@@ -16,25 +16,6 @@ void GildedRose::updateQuality()
     }
 }
 
-void GildedRose::adjustQualityAfterSellIn(Item& item) {
-	if (item.getSellIn() < 0)
-	{
-		if (item.isAgedBrie())
-		{
-			item.incrementQuality();
-		}
-		else {
-			if (item.isBackstagePass())
-			{
-				item.zeroQuality();
-			}
-			else
-			{
-				item.decrementQuality();
-			}
-		}
-	}
-}
 
 void GildedRose::adjustQualityBeforeSellIn(Item& item) {
 	if (item.isAgedBrie() || item.isBackstagePass())
@@ -56,6 +37,26 @@ void GildedRose::adjustQualityBeforeSellIn(Item& item) {
 	}
 	else {
 		item.decrementQuality();
+	}
+}
+
+void GildedRose::adjustQualityAfterSellIn(Item& item) {
+	if (item.getSellIn() < 0)
+	{
+		if (item.isAgedBrie())
+		{
+			item.incrementQuality();
+		}
+		else {
+			if (item.isBackstagePass())
+			{
+				item.zeroQuality();
+			}
+			else
+			{
+				item.decrementQuality();
+			}
+		}
 	}
 }
 
