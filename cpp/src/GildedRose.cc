@@ -13,7 +13,7 @@ void GildedRose::updateQuality()
             {
                 if (!item.isSulfuras())
                 {
-                    item.quality = item.quality - 1;
+                    item.decrementQuality();
                 }
             }
         }
@@ -21,7 +21,7 @@ void GildedRose::updateQuality()
         {
             if (item.quality < 50)
             {
-                item.quality = item.quality + 1;
+                item.incrementQuality();;
 
                 if (item.isBackstagePass())
                 {
@@ -29,7 +29,7 @@ void GildedRose::updateQuality()
                     {
                         if (item.quality < 50)
                         {
-                            item.quality = item.quality + 1;
+                            item.incrementQuality();
                         }
                     }
 
@@ -37,7 +37,7 @@ void GildedRose::updateQuality()
                     {
                         if (item.quality < 50)
                         {
-                            item.quality = item.quality + 1;
+                            item.incrementQuality();
                         }
                     }
                 }
@@ -72,7 +72,7 @@ void GildedRose::updateQuality()
             {
                 if (item.quality < 50)
                 {
-                    item.quality = item.quality + 1;
+                    item.incrementQuality();
                 }
             }
         }
@@ -97,4 +97,8 @@ void Item::decrementSellIn() {
 
 void Item::decrementQuality() {
     --quality;
+}
+
+void Item::incrementQuality() {
+    ++quality;
 }

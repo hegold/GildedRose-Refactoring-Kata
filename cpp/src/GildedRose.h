@@ -18,7 +18,7 @@ public:
     
     void decrementSellIn();
     void decrementQuality();
-    //void incrementQuality();
+    void incrementQuality();
 };
 
 class GildedRose
