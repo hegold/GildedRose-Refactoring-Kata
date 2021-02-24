@@ -5,10 +5,8 @@ GildedRose::GildedRose(vector<Item> & items) : items(items)
     
 void GildedRose::updateQuality() 
 {
-    for (int i = 0; i < items.size(); i++)
+    for (Item& item : items)
     {
-        Item& item = items[i];
-
         if (!item.isAgedBrie() && !item.isBackstagePass())
         {
             if (item.quality > 0)
@@ -48,7 +46,7 @@ void GildedRose::updateQuality()
 
         if (!item.isSulfuras())
         {
-            item.sellIn = item.sellIn - 1;
+            item.decrementSellIn();
         }
 
         if (item.sellIn < 0)
@@ -61,13 +59,13 @@ void GildedRose::updateQuality()
                     {
                         if (!item.isSulfuras())
                         {
-                            item.quality = item.quality - 1;
+                            item.decrementQuality();
                         }
                     }
                 }
                 else
                 {
-                    item.quality = item.quality - item.quality;
+                    item.quality = 0;
                 }
             }
             else
@@ -91,4 +89,12 @@ bool Item::isSulfuras() const {
 
 bool Item::isBackstagePass() const {
     return name == "Backstage passes to a TAFKAL80ETC concert";
+}
+
+void Item::decrementSellIn() {
+    --sellIn;
+}
+
+void Item::decrementQuality() {
+    --quality;
 }

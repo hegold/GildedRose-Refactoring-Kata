@@ -15,6 +15,10 @@ public:
     bool isAgedBrie() const;
     bool isSulfuras() const;
     bool isBackstagePass() const;
+    
+    void decrementSellIn();
+    void decrementQuality();
+    //void incrementQuality();
 };
 
 class GildedRose
