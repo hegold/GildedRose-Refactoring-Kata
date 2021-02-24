@@ -11,6 +11,10 @@ public:
     int quality;
     Item(string name, int sellIn, int quality) : name(name), sellIn(sellIn), quality(quality) 
     {}
+
+    bool isAgedBrie() const;
+    bool isSulfuras() const;
+    bool isBackstagePass() const;
 };
 
 class GildedRose

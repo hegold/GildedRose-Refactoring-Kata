@@ -80,3 +80,15 @@ void GildedRose::updateQuality()
         }
     }
 }
+
+bool Item::isAgedBrie() const {
+    return name == "Aged Brie";
+}
+
+bool Item::isSulfuras() const {
+    return name == "Sulfuras, Hand of Ragnaros";
+}
+
+bool Item::isBackstagePass() const {
+    return name == "Backstage passes to a TAFKAL80ETC concert";
+}
