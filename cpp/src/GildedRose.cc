@@ -32,11 +32,7 @@ void GildedRose::updateQuality()
 }
 
 void GildedRose::adjustQualityBeforeSellIn(Item& item) {
-	if (!(item.isAgedBrie() || item.isBackstagePass()))
-	{
-		item.decrementQuality();
-	}
-	else
+	if (item.isAgedBrie() || item.isBackstagePass())
 	{
 		item.incrementQuality();
 
@@ -52,6 +48,9 @@ void GildedRose::adjustQualityBeforeSellIn(Item& item) {
 				item.incrementQuality();
 			}
 		}
+	}
+	else {
+		item.decrementQuality();
 	}
 }
 
