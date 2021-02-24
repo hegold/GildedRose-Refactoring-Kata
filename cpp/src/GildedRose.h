@@ -26,7 +26,7 @@ public:
     virtual void decrementSellInThenAdjustQualityIfPassedSellin();
     virtual void decrementQuality();
     virtual void preAdjustQuality();
-    virtual void postAdjustQuality();
+    virtual void adjustQualityAfterSellInPasses();
 };
 
 class ItemGettingBetterWithAge : public Item {
@@ -34,7 +34,7 @@ public:
     ItemGettingBetterWithAge(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
 
 	virtual void preAdjustQuality() override;
-	virtual void postAdjustQuality() override;
+	virtual void adjustQualityAfterSellInPasses() override;
 };
 
 class BackstagePass : public Item {
@@ -42,7 +42,7 @@ public:
 	BackstagePass(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
 
 	virtual void preAdjustQuality() override;
-	virtual void postAdjustQuality() override;
+	virtual void adjustQualityAfterSellInPasses() override;
 };
 
 class Sulfuras : public Item {

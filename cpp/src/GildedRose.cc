@@ -34,7 +34,7 @@ bool Item::isPastSellIn() const {
 void Item::decrementSellInThenAdjustQualityIfPassedSellin() {
 	--sellIn;
 	if (isPastSellIn()) {
-		postAdjustQuality();
+		adjustQualityAfterSellInPasses();
 	}
 }
 
@@ -54,7 +54,7 @@ void Item::preAdjustQuality() {
 	decrementQuality();
 }
 
-void Item::postAdjustQuality() {
+void Item::adjustQualityAfterSellInPasses() {
 	decrementQuality();
 }
 
@@ -62,7 +62,7 @@ void ItemGettingBetterWithAge::preAdjustQuality() {
 	incrementQuality();
 }
 
-void ItemGettingBetterWithAge::postAdjustQuality() {
+void ItemGettingBetterWithAge::adjustQualityAfterSellInPasses() {
 	incrementQuality();
 }
 
@@ -95,7 +95,7 @@ void BackstagePass::preAdjustQuality() {
 	}
 }
 
-void BackstagePass::postAdjustQuality() {
+void BackstagePass::adjustQualityAfterSellInPasses() {
 	quality = 0;
 }
 
