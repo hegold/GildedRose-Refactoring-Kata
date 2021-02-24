@@ -33,6 +33,8 @@ public:
     
     void updateQuality();
 
+	void adjustQualityAfterSellIn(Item& item);
+
     void adjustQualityBeforeSellIn(Item& item);
 
 };
