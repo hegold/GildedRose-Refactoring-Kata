@@ -41,10 +41,7 @@ void GildedRose::updateQuality()
             }
         }
 
-        if (!item.isSulfuras())
-        {
-            item.decrementSellIn();
-        }
+        item.decrementSellIn();
 
         if (item.sellIn < 0)
         {
@@ -54,10 +51,7 @@ void GildedRose::updateQuality()
                 {
                     if (item.quality > 0)
                     {
-                        if (!item.isSulfuras())
-                        {
-                            item.decrementQuality();
-                        }
+                        item.decrementQuality();
                     }
                 }
                 else
@@ -89,7 +83,9 @@ bool Item::isBackstagePass() const {
 }
 
 void Item::decrementSellIn() {
-    --sellIn;
+	if (!isSulfuras()) {
+		--sellIn;
+	}
 }
 
 void Item::decrementQuality() {
