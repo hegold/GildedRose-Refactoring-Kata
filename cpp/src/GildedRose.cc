@@ -9,7 +9,6 @@ void GildedRose::updateQuality()
     {
         adjustQualityBeforeSellIn(item);
 
-
         item.decrementSellIn();
 
         if (item.getSellIn() < 0)
@@ -33,7 +32,7 @@ void GildedRose::updateQuality()
 }
 
 void GildedRose::adjustQualityBeforeSellIn(Item& item) {
-	if (!item.isAgedBrie() && !item.isBackstagePass())
+	if (!(item.isAgedBrie() || item.isBackstagePass()))
 	{
 		item.decrementQuality();
 	}
