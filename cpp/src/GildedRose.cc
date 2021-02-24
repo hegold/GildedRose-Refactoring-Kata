@@ -9,10 +9,7 @@ void GildedRose::updateQuality()
     {
         if (!item.isAgedBrie() && !item.isBackstagePass())
         {
-            if (item.quality > 0)
-            {
-                item.decrementQuality();
-            }
+            item.decrementQuality();
         }
         else
         {
@@ -49,10 +46,7 @@ void GildedRose::updateQuality()
             {
                 if (!item.isBackstagePass())
                 {
-                    if (item.quality > 0)
-                    {
-                        item.decrementQuality();
-                    }
+                    item.decrementQuality();
                 }
                 else
                 {
@@ -89,7 +83,7 @@ void Item::decrementSellIn() {
 }
 
 void Item::decrementQuality() {
-    if (!isSulfuras()) {
+    if (quality > 0 && !isSulfuras()) {
         --quality;
     }
 }
