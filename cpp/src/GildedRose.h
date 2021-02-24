@@ -36,6 +36,5 @@ public:
 
 private:
     void adjustQualityBeforeSellIn(Item& item);
-	void adjustQualityAfterSellIn(Item& item);
 };
 
