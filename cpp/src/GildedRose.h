@@ -23,7 +23,7 @@ public:
     
     void incrementQuality();
 
-    virtual void decrementSellIn();
+    virtual void decrementSellInThenAdjustQualityIfPassedSellin();
     virtual void decrementQuality();
     virtual void preAdjustQuality();
     virtual void postAdjustQuality();
@@ -49,7 +49,7 @@ class Sulfuras : public Item {
 public:
     Sulfuras(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
 
-    virtual void decrementSellIn() override;
+    virtual void decrementSellInThenAdjustQualityIfPassedSellin() override;
     virtual void decrementQuality() override;
 };
 

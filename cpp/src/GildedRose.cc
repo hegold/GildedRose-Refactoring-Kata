@@ -15,8 +15,7 @@ void GildedRose::updateQuality()
 	for (auto&& item : newItems)
 	{
 		item->preAdjustQuality();
-		item->decrementSellIn();
-		item->postAdjustQuality();
+		item->decrementSellInThenAdjustQualityIfPassedSellin();
 	}
 }
 
@@ -32,8 +31,11 @@ bool Item::isPastSellIn() const {
 	return sellIn < 0;
 }
 
-void Item::decrementSellIn() {
+void Item::decrementSellInThenAdjustQualityIfPassedSellin() {
 	--sellIn;
+	if (isPastSellIn()) {
+		postAdjustQuality();
+	}
 }
 
 void Item::decrementQuality() {
@@ -53,10 +55,7 @@ void Item::preAdjustQuality() {
 }
 
 void Item::postAdjustQuality() {
-	if (isPastSellIn())
-	{
-		decrementQuality();
-	}
+	decrementQuality();
 }
 
 void ItemGettingBetterWithAge::preAdjustQuality() {
@@ -64,10 +63,7 @@ void ItemGettingBetterWithAge::preAdjustQuality() {
 }
 
 void ItemGettingBetterWithAge::postAdjustQuality() {
-	if (isPastSellIn())
-	{
-		incrementQuality();
-	}
+	incrementQuality();
 }
 
 std::shared_ptr<Item> ItemFactory::make(string name, int sellIn, int quality) {
@@ -100,13 +96,10 @@ void BackstagePass::preAdjustQuality() {
 }
 
 void BackstagePass::postAdjustQuality() {
-	if (isPastSellIn())
-	{
-		quality = 0;
-	}
+	quality = 0;
 }
 
-void Sulfuras::decrementSellIn() {
+void Sulfuras::decrementSellInThenAdjustQualityIfPassedSellin() {
 	// Does not change sell in
 }
 
