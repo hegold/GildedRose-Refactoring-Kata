@@ -14,7 +14,7 @@ void GildedRose::updateQuality()
 {
 	for (auto&& item : newItems)
 	{
-		item->preAdjustQuality();
+		item->updateQuality();
 		item->decrementSellInThenAdjustQualityIfPassedSellin();
 	}
 }
@@ -50,7 +50,7 @@ void Item::incrementQuality() {
     }
 }
 
-void Item::preAdjustQuality() {
+void Item::updateQuality() {
 	decrementQuality();
 }
 
@@ -58,7 +58,7 @@ void Item::adjustQualityAfterSellInPasses() {
 	decrementQuality();
 }
 
-void ItemGettingBetterWithAge::preAdjustQuality() {
+void ItemGettingBetterWithAge::updateQuality() {
 	incrementQuality();
 }
 
@@ -81,7 +81,7 @@ std::shared_ptr<Item> ItemFactory::make(string name, int sellIn, int quality) {
 	}
 }
 
-void BackstagePass::preAdjustQuality() {
+void BackstagePass::updateQuality() {
 	incrementQuality();
 
 	if (getSellIn() < 11)
