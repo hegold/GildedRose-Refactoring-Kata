@@ -12,10 +12,9 @@ public:
     Item(string name, int sellIn, int quality) : name(name), sellIn(sellIn), quality(quality) 
     {}
     
-    int getSellIn() const { return sellIn; }
-    int getQuality() const { return quality; }
-
-    void setQualityREMOVE(int q) { quality = q; }
+    int getSellIn() const;
+    int getQuality() const;
+    void zeroQuality() { quality = 0; }
 
     bool isAgedBrie() const;
     bool isSulfuras() const;

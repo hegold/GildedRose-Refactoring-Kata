@@ -41,7 +41,7 @@ void GildedRose::updateQuality()
                 }
                 else
                 {
-                    item.setQualityREMOVE(0);
+                    item.zeroQuality();
                 }
             }
             else
@@ -50,6 +50,14 @@ void GildedRose::updateQuality()
             }
         }
     }
+}
+
+int Item::getSellIn() const {
+	return sellIn;
+}
+
+int Item::getQuality() const {
+	return quality;
 }
 
 bool Item::isAgedBrie() const {
