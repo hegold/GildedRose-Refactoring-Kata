@@ -36,10 +36,6 @@ bool Item::isSulfuras() const {
     return name == "Sulfuras, Hand of Ragnaros";
 }
 
-bool Item::isBackstagePass() const {
-    return name == "Backstage passes to a TAFKAL80ETC concert";
-}
-
 void Item::decrementSellIn() {
 	if (!isSulfuras()) {
 		--sellIn;
@@ -59,34 +55,13 @@ void Item::incrementQuality() {
 }
 
 void Item::preAdjustQuality() {
-	if (isBackstagePass())
-	{
-		incrementQuality();
-
-		if (getSellIn() < 11)
-		{
-			incrementQuality();
-		}
-
-		if (getSellIn() < 6)
-		{
-			incrementQuality();
-		}
-	}
-	else {
-		decrementQuality();
-	}
+	decrementQuality();
 }
 
 void Item::postAdjustQuality() {
 	if (isPastSellIn())
 	{
-		if (isBackstagePass()) {
-			quality = 0;
-		}
-		else {
-			decrementQuality();
-		}
+		decrementQuality();
 	}
 }
 
@@ -105,7 +80,31 @@ std::shared_ptr<Item> ItemFactory::make(string name, int sellIn, int quality) {
 	if (name == "Aged Brie") {
 		return make_shared<ItemGettingBetterWithAge>(name, sellIn, quality);
 	}
+	else if (name == "Backstage passes to a TAFKAL80ETC concert") {
+		return make_shared<BackstagePass>(name, sellIn, quality);
+	}
 	else {
 		return make_shared<Item>(name, sellIn, quality);
+	}
+}
+
+void BackstagePass::preAdjustQuality() {
+	incrementQuality();
+
+	if (getSellIn() < 11)
+	{
+		incrementQuality();
+	}
+
+	if (getSellIn() < 6)
+	{
+		incrementQuality();
+	}
+}
+
+void BackstagePass::postAdjustQuality() {
+	if (isPastSellIn())
+	{
+		quality = 0;
 	}
 }
