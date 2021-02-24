@@ -47,15 +47,12 @@ void GildedRose::adjustQualityAfterSellIn(Item& item) {
 		{
 			item.incrementQuality();
 		}
-		else {
-			if (item.isBackstagePass())
-			{
-				item.zeroQuality();
-			}
-			else
-			{
-				item.decrementQuality();
-			}
+		else if (item.isBackstagePass()) {
+			item.zeroQuality();
+		}
+		else
+		{
+			item.decrementQuality();
 		}
 	}
 }
