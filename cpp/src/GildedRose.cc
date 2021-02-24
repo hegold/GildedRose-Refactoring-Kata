@@ -1,23 +1,17 @@
 #include "GildedRose.h"
 
-GildedRose::GildedRose(vector<Item> & items) 
-	: items(items)
-{}
+GildedRose::GildedRose(vector<Item> & items) {
+	for (auto&& item : items) {
+		newItems.push_back(ItemFactory::make(item.name, item.getSellIn(), item.getQuality()));
+	}
+}
     
 GildedRose::GildedRose(vector<shared_ptr<Item>> items)
 	: newItems(std::move(items))
-	, items(vector<Item>()) 
 {}
 
 void GildedRose::updateQuality() 
 {
-    for (Item& item : items)
-    {
-		item.preAdjustQuality();
-        item.decrementSellIn();
-		item.postAdjustQuality();
-    }
-
 	for (auto&& item : newItems)
 	{
 		item->preAdjustQuality();

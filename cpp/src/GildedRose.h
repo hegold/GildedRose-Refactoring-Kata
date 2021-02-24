@@ -45,11 +45,10 @@ struct ItemFactory {
 
 class GildedRose
 {
-public:
-    vector<Item>& items; // legacy
-    GildedRose(vector<Item>& items);
-
     vector<shared_ptr<Item>> newItems;
+public:
+
+    GildedRose(vector<Item>& items);
     GildedRose(vector<shared_ptr<Item>> items);
     
     void updateQuality();
