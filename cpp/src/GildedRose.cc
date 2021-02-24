@@ -11,10 +11,7 @@ void GildedRose::updateQuality()
         {
             if (item.quality > 0)
             {
-                if (!item.isSulfuras())
-                {
-                    item.decrementQuality();
-                }
+                item.decrementQuality();
             }
         }
         else
@@ -96,7 +93,9 @@ void Item::decrementSellIn() {
 }
 
 void Item::decrementQuality() {
-    --quality;
+    if (!isSulfuras()) {
+        --quality;
+    }
 }
 
 void Item::incrementQuality() {
