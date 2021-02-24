@@ -44,13 +44,7 @@ void Item::decrementSellIn() {
 }
 
 void Item::decrementQuality() {
-	if (isBackstagePass() && isPastSellIn()) {
-		quality = 0;
-	}
-	else if (isAgedBrie() && isPastSellIn()) {
-		incrementQuality();
-	}
-	else if (quality > 0 && !isSulfuras()) {
+	if (quality > 0 && !isSulfuras()) {
         --quality;
     }
 }
@@ -87,6 +81,14 @@ void Item::preAdjustQuality() {
 void Item::postAdjustQuality() {
 	if (isPastSellIn())
 	{
-		decrementQuality();
+		if (isBackstagePass()) {
+			quality = 0;
+		}
+		else if (isAgedBrie()) {
+			incrementQuality();
+		}
+		else {
+			decrementQuality();
+		}
 	}
 }
