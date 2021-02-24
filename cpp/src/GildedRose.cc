@@ -32,8 +32,8 @@ bool Item::isPastSellIn() const {
 	return sellIn < 0;
 }
 
-bool Item::isAgedBrie() const {
-    return name == "Aged Brie";
+bool Item::getsBetterWithAge() const {
+	return false;
 }
 
 bool Item::isSulfuras() const {
@@ -63,7 +63,7 @@ void Item::incrementQuality() {
 }
 
 void Item::preAdjustQuality() {
-	if (isAgedBrie()) {
+	if (getsBetterWithAge()) {
 		incrementQuality();
 	}
 	else if (isBackstagePass())
@@ -91,7 +91,7 @@ void Item::postAdjustQuality() {
 		if (isBackstagePass()) {
 			quality = 0;
 		}
-		else if (isAgedBrie()) {
+		else if (getsBetterWithAge()) {
 			incrementQuality();
 		}
 		else {
@@ -100,13 +100,13 @@ void Item::postAdjustQuality() {
 	}
 }
 
-bool AgedBrie::isAgedBrie() const {
+bool ItemGettingBetterWithAge::getsBetterWithAge() const {
 	return true;
 }
 
 std::shared_ptr<Item> ItemFactory::make(string name, int sellIn, int quality) {
 	if (name == "Aged Brie") {
-		return make_shared<AgedBrie>(name, sellIn, quality);
+		return make_shared<ItemGettingBetterWithAge>(name, sellIn, quality);
 	}
 	else {
 		return make_shared<Item>(name, sellIn, quality);

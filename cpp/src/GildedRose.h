@@ -20,10 +20,11 @@ public:
     void zeroQuality() { quality = 0; }
     bool isPastSellIn() const;
     
-    virtual bool isAgedBrie() const;
     bool isSulfuras() const;
     bool isBackstagePass() const;
     
+    virtual bool getsBetterWithAge() const;
+
     void decrementSellIn();
     void decrementQuality();
     void incrementQuality();
@@ -32,11 +33,11 @@ public:
     void postAdjustQuality();
 };
 
-class AgedBrie : public Item {
+class ItemGettingBetterWithAge : public Item {
 public:
-    AgedBrie(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
+    ItemGettingBetterWithAge(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
     
-    virtual bool isAgedBrie() const override;
+    virtual bool getsBetterWithAge() const override;
 };
 
 struct ItemFactory {
