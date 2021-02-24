@@ -25,17 +25,14 @@ void GildedRose::adjustQualityBeforeSellIn(Item& item) {
 	{
 		item.incrementQuality();
 
-		if (item.isBackstagePass())
+		if (item.getSellIn() < 11)
 		{
-			if (item.getSellIn() < 11)
-			{
-				item.incrementQuality();
-			}
+			item.incrementQuality();
+		}
 
-			if (item.getSellIn() < 6)
-			{
-				item.incrementQuality();
-			}
+		if (item.getSellIn() < 6)
+		{
+			item.incrementQuality();
 		}
 	}
 	else {
