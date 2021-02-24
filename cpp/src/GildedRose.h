@@ -25,12 +25,12 @@ public:
     
     virtual bool getsBetterWithAge() const;
 
-    void decrementSellIn();
     void decrementQuality();
     void incrementQuality();
 
-    void preAdjustQuality();
-    void postAdjustQuality();
+    void decrementSellIn();
+    virtual void preAdjustQuality();
+    virtual void postAdjustQuality();
 };
 
 class ItemGettingBetterWithAge : public Item {
@@ -38,6 +38,9 @@ public:
     ItemGettingBetterWithAge(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
     
     virtual bool getsBetterWithAge() const override;
+
+	virtual void preAdjustQuality() override;
+	virtual void postAdjustQuality() override;
 };
 
 struct ItemFactory {

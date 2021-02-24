@@ -63,10 +63,7 @@ void Item::incrementQuality() {
 }
 
 void Item::preAdjustQuality() {
-	if (getsBetterWithAge()) {
-		incrementQuality();
-	}
-	else if (isBackstagePass())
+	if (isBackstagePass())
 	{
 		incrementQuality();
 
@@ -91,9 +88,6 @@ void Item::postAdjustQuality() {
 		if (isBackstagePass()) {
 			quality = 0;
 		}
-		else if (getsBetterWithAge()) {
-			incrementQuality();
-		}
 		else {
 			decrementQuality();
 		}
@@ -102,6 +96,17 @@ void Item::postAdjustQuality() {
 
 bool ItemGettingBetterWithAge::getsBetterWithAge() const {
 	return true;
+}
+
+void ItemGettingBetterWithAge::preAdjustQuality() {
+	incrementQuality();
+}
+
+void ItemGettingBetterWithAge::postAdjustQuality() {
+	if (isPastSellIn())
+	{
+		incrementQuality();
+	}
 }
 
 std::shared_ptr<Item> ItemFactory::make(string name, int sellIn, int quality) {
