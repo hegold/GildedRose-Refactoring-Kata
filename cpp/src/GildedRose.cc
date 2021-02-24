@@ -32,10 +32,6 @@ bool Item::isPastSellIn() const {
 	return sellIn < 0;
 }
 
-bool Item::getsBetterWithAge() const {
-	return false;
-}
-
 bool Item::isSulfuras() const {
     return name == "Sulfuras, Hand of Ragnaros";
 }
@@ -92,10 +88,6 @@ void Item::postAdjustQuality() {
 			decrementQuality();
 		}
 	}
-}
-
-bool ItemGettingBetterWithAge::getsBetterWithAge() const {
-	return true;
 }
 
 void ItemGettingBetterWithAge::preAdjustQuality() {

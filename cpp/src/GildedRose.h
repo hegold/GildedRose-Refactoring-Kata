@@ -23,8 +23,6 @@ public:
     bool isSulfuras() const;
     bool isBackstagePass() const;
     
-    virtual bool getsBetterWithAge() const;
-
     void decrementQuality();
     void incrementQuality();
 
@@ -36,8 +34,6 @@ public:
 class ItemGettingBetterWithAge : public Item {
 public:
     ItemGettingBetterWithAge(string name, int sellIn, int quality) : Item(name, sellIn, quality) {}
-    
-    virtual bool getsBetterWithAge() const override;
 
 	virtual void preAdjustQuality() override;
 	virtual void postAdjustQuality() override;
