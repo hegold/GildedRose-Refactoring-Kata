@@ -24,6 +24,9 @@ public:
     void decrementSellIn();
     void decrementQuality();
     void incrementQuality();
+
+    void preAdjustQuality();
+    void postAdjustQuality();
 };
 
 class GildedRose
@@ -33,8 +36,5 @@ public:
     GildedRose(vector<Item> & items);
     
     void updateQuality();
-
-private:
-    void adjustQualityBeforeSellIn(Item& item);
 };
 

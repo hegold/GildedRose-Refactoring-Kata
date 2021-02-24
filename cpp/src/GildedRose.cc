@@ -7,39 +7,10 @@ void GildedRose::updateQuality()
 {
     for (Item& item : items)
     {
-        adjustQualityBeforeSellIn(item);
-
+		item.preAdjustQuality();
         item.decrementSellIn();
-
-		if (item.isPastSellIn())
-		{
-			item.decrementQuality();
-		}
+		item.postAdjustQuality();
     }
-}
-
-
-void GildedRose::adjustQualityBeforeSellIn(Item& item) {
-	if (item.isAgedBrie()) {
-		item.incrementQuality();
-	}
-	else if (item.isBackstagePass())
-	{
-		item.incrementQuality();
-
-		if (item.getSellIn() < 11)
-		{
-			item.incrementQuality();
-		}
-
-		if (item.getSellIn() < 6)
-		{
-			item.incrementQuality();
-		}
-	}
-	else {
-		item.decrementQuality();
-	}
 }
 
 int Item::getSellIn() const {
@@ -88,4 +59,34 @@ void Item::incrementQuality() {
     if (quality < 50) {
         ++quality;
     }
+}
+
+void Item::preAdjustQuality() {
+	if (isAgedBrie()) {
+		incrementQuality();
+	}
+	else if (isBackstagePass())
+	{
+		incrementQuality();
+
+		if (getSellIn() < 11)
+		{
+			incrementQuality();
+		}
+
+		if (getSellIn() < 6)
+		{
+			incrementQuality();
+		}
+	}
+	else {
+		decrementQuality();
+	}
+}
+
+void Item::postAdjustQuality() {
+	if (isPastSellIn())
+	{
+		decrementQuality();
+	}
 }
