@@ -5,12 +5,17 @@ using namespace std;
 
 class Item
 {
+	int sellIn;
+	int quality;
 public:
     string name;
-    int sellIn;
-    int quality;
     Item(string name, int sellIn, int quality) : name(name), sellIn(sellIn), quality(quality) 
     {}
+    
+    int getSellIn() const { return sellIn; }
+    int getQuality() const { return quality; }
+
+    void setQualityREMOVE(int q) { quality = q; }
 
     bool isAgedBrie() const;
     bool isSulfuras() const;

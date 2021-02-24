@@ -13,23 +13,23 @@ void GildedRose::updateQuality()
         }
         else
         {
-            if (item.quality < 50)
+            if (item.getQuality() < 50)
             {
-                item.incrementQuality();;
+                item.incrementQuality();
 
                 if (item.isBackstagePass())
                 {
-                    if (item.sellIn < 11)
+                    if (item.getSellIn() < 11)
                     {
-                        if (item.quality < 50)
+                        if (item.getQuality() < 50)
                         {
                             item.incrementQuality();
                         }
                     }
 
-                    if (item.sellIn < 6)
+                    if (item.getSellIn() < 6)
                     {
-                        if (item.quality < 50)
+                        if (item.getQuality() < 50)
                         {
                             item.incrementQuality();
                         }
@@ -40,7 +40,7 @@ void GildedRose::updateQuality()
 
         item.decrementSellIn();
 
-        if (item.sellIn < 0)
+        if (item.getSellIn() < 0)
         {
             if (!item.isAgedBrie())
             {
@@ -50,12 +50,12 @@ void GildedRose::updateQuality()
                 }
                 else
                 {
-                    item.quality = 0;
+                    item.setQualityREMOVE(0);
                 }
             }
             else
             {
-                if (item.quality < 50)
+                if (item.getQuality() < 50)
                 {
                     item.incrementQuality();
                 }
